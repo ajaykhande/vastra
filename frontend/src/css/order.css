@@ -1,0 +1,199 @@
+.bag-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* single item */
+.bag-item-container {
+  display: flex;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid #eaeaec;
+  border-radius: 6px;
+  background: #ffffff;
+  position: relative;
+  cursor: pointer;
+}
+
+/* image */
+.bag-item-img {
+  width: 100px;
+  height: 130px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #f5f5f5;
+}
+
+/* info */
+.bag-item-info {
+  flex: 1;
+}
+
+.company-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #282c3f;
+}
+
+.item-name {
+  font-size: 10px;
+  color: #535766;
+  margin: 4px 0 10px;
+}
+
+/* price */
+.price {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.current-price {
+  font-weight: 700;
+  font-size: 11px;
+  color: #282c3f;
+}
+
+.original-price {
+  text-decoration: line-through;
+  font-size: 9px;
+  color: #7e818c;
+}
+
+.discount {
+  color: #f16565;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.size-qty-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.order-size-qty {
+  padding: 0px 6px;
+  font-size: 9px;
+  font-weight: 600;
+  align-items: center;
+  display: flex;
+  border: none;
+}
+
+.order-place-date {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  font-size: 11px;
+  padding-top: 8px;
+}
+
+.order-place-on {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.order-status.placed {
+  display: inline-block;
+  background-color: #29ca4e;
+  color: #fff;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-style: italic;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.order-status.cancelled {
+  background-color: #f66652;
+  color: #fff;
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-style: italic;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.cancel-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  transition: all 0.35s ease;
+}
+
+.cancel-btn {
+  border: none;
+  padding: 2px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 5px;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .current-price {
+    font-size: 14px;
+  }
+
+  .original-price {
+    font-size: 12px;
+  }
+
+  .discount {
+    font-size: 12px;
+  }
+
+  .order-size-qty {
+    font-size: 11px;
+  }
+
+  .order-place-date {
+    font-size: 14px;
+  }
+
+  .order-status.placed {
+    font-size: 15px;
+  }
+
+  .order-status.cancelled {
+    font-size: 15px;
+  }
+
+  .bag-items-container {
+    flex: 3;
+  }
+
+  .bag-item-img {
+    width: 120px;
+    height: 150px;
+  }
+
+  .company-name {
+    font-size: 15px;
+  }
+
+  .item-name {
+    font-size: 14px;
+  }
+
+  .cancel-btn {
+    font-size: 16px;
+  }
+}

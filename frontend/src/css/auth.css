@@ -1,0 +1,87 @@
+/* login and register Page */
+/* =========================
+   MOBILE FIRST (default)
+   ========================= */
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(120deg, #e24a6e, #f9d2be);
+}
+
+.auth-box {
+  background: #fff;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 25vh;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff3f6c;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.auth-box button:hover {
+  background-color: #e6355c;
+}
+
+.auth-box p {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.auth-box a {
+  color: #ff3f6c;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* =========================
+   DESKTOP / TABLET
+   ========================= */
+
+@media (min-width: 768px) {
+  .auth-box {
+    max-width: 450px;
+    padding: 30px;
+    margin-bottom: 18vh;
+  }
+
+  .auth-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .auth-box input {
+    font-size: 16px;
+  }
+}

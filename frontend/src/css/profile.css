@@ -1,0 +1,312 @@
+/* profileLayout and profile css */
+/* ==========================================================================
+   1. DEFAULT MOBILE STYLES (Sabse pehle mobile ke liye - 385px friendly)
+   ========================================================================== */
+
+/* Universal Reset: Padding ko width ke andar hi rakhega, screen se bahar nahi bhagne dega */
+
+.profile-container {
+  display: flex;
+  flex-direction: column; /* Mobile par sidebar top par aur content neeche */
+  padding: 10px; /* 385px screen ke liye padding kam rakhi hai */
+  gap: 20px;
+  width: 100%;
+}
+
+/* SIDEBAR (Mobile Layout) */
+.profile-sidebar {
+  width: 100%;
+  display: flex; /* Mobile par menu items ek horizontal line mein aayenge */
+  overflow-x: auto; /* Sideways scroll ho sake agar items zyada hon */
+  white-space: nowrap;
+  gap: 5px;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fdfdfd;
+  -webkit-overflow-scrolling: touch; /* Smooth mobile scroll */
+}
+
+/* Hide scrollbar for clean UI in mobile sidebar */
+.profile-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  flex: 0 0 auto; /* Items ko force squeeze hone se rokega */
+  text-align: center;
+  font-size: 13px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  width: 19%;
+}
+
+.menu-item span {
+  display: inline; /* Mobile par secondary text same line mein rahega */
+  font-size: 11px;
+  color: #777;
+  margin-left: 5px;
+}
+
+.menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.menu-item.active {
+  background-color: #fff0f0;
+  font-weight: 600;
+}
+
+/* RIGHT CONTENT */
+.profile-content {
+  width: 100%;
+  min-width: 0;
+}
+
+.profile-content h2 {
+  margin-bottom: 15px;
+}
+
+.profile-wrapper {
+  max-width: 100%;
+  padding: 0; /* Extra padding hatayi taaki 385px par space mile */
+}
+
+.profile-box {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 12px; /* Small screens ke liye responsive padding */
+  border-radius: 8px;
+  width: 100%;
+}
+
+.profile-box p {
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  background-color: #636363;
+  color: #fff;
+}
+
+.logout-btn:hover {
+  background-color: #e63c3c;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.profile-title {
+  font-size: 18px; /* Choti screens ke liye perfect title size */
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.profile-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px; /* Card padding tightly fit for 385px */
+}
+
+.profile-row {
+  display: flex;
+  flex-direction: column; /* Mobile par Label ke neeche Input aayega */
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 6px;
+}
+
+.profile-label {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+.profile-value {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profile-input {
+  width: 100%; /* Mobile par input box poori width lega */
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* BUTTONS */
+.edit-profile-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #2874f0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-profile-btn:hover,
+.change-password-btn:hover,
+.save-btn:hover {
+  background-color: #1c52a7;
+}
+
+.profile-btn-group {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.profile-btn-group button {
+  flex: 1 1 0;
+  height: 40px;
+  padding: 0;
+  line-height: 40px;
+  font-size: 13px; /* 385px par text wrap na ho isliye chota kiya */
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+
+.save-btn {
+  background-color: #2874f0;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.cancel-btn:hover {
+  background-color: #932121;
+}
+
+/* SECURITY SECTION */
+.security-card {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.security-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.change-password-btn {
+  width: 100%;
+  height: 42px;
+  background-color: #2874f0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   2. DESKTOP MEDIA QUERY (769px ya usse badi screens ke liye)
+   ========================================================================== */
+@media screen and (min-width: 769px) {
+  .profile-container {
+    flex-direction: row; /* Desktop par side-by-side view */
+    padding: 30px;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* SIDEBAR (Desktop changes) */
+  .profile-sidebar {
+    width: 175px; /* Aapki original sidebar width */
+    display: block; /* Horizontal se wapas vertical list layout */
+    position: sticky;
+    top: 110px;
+    height: fit-content;
+    padding: 15px;
+  }
+
+  .menu-item {
+    margin-bottom: 10px;
+    padding: 15px;
+    text-align: left;
+    border: none;
+    width: 100%;
+    align-items: center;
+    border: 1px solid #eee;
+  }
+
+  .menu-item span {
+    display: block; /* Text niche shift ho jayega desktop par */
+    margin-top: 4px;
+    margin-left: 0;
+    font-size: 13px;
+  }
+
+  /* CONTENT AREAS (Desktop updates) */
+  .profile-wrapper {
+    max-width: 500px; /* Wapas original container size */
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .profile-box {
+    max-width: 400px; /* Original code limit */
+    padding: 20px;
+  }
+
+  .profile-card {
+    padding: 16px;
+  }
+
+  .profile-title {
+    font-size: 20px;
+  }
+
+  /* FORM LAYOUT (Desktop view) */
+  .profile-row {
+    flex-direction: row; /* Label left mein aur Input right mein */
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .profile-input {
+    width: 60%; /* Original desktop spacing width */
+  }
+
+  .profile-btn-group {
+    gap: 12px;
+  }
+
+  .profile-btn-group button {
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+  }
+
+  .security-card {
+    padding: 14px;
+  }
+}
