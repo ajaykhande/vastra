@@ -2,18 +2,19 @@ package vastra_backend.security;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
-import vastra_backend.enums.Role;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import vastra_backend.enums.Role;
 
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "myjwtsecretkeymyjwtsecretkey123456";
+    @Value("${jwt.secret.key}")
+    private static String SECRET_KEY;
 
     public String generateToken(String email, Role role) {
 
