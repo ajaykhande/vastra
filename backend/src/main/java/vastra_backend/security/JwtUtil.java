@@ -13,8 +13,11 @@ import vastra_backend.enums.Role;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret.key}")
-    private static String SECRET_KEY;
+    private final String SECRET_KEY;
+
+    public JwtUtil(@Value("${jwt.secret.key}") String SECRET_KEY) {
+        this.SECRET_KEY = SECRET_KEY;
+    }
 
     public String generateToken(String email, Role role) {
 
