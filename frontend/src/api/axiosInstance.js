@@ -1,8 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8081",
+  baseURL: BASE_URL,
 });
 
 axiosInstance.interceptors.request.use(
@@ -23,7 +24,6 @@ axiosInstance.interceptors.response.use(
     const data = error.response?.data;
 
     if (data?.message) {
-     
       if (data.message === "Address not found") {
         return Promise.reject(error);
       }
