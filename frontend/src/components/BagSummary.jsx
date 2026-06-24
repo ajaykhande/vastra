@@ -33,7 +33,6 @@ const BagSummary = ({ products }) => {
       }),
     );
     navigate("/checkout");
-    alert("orderSummary create");
   };
   return (
     <div className="bag-summary">

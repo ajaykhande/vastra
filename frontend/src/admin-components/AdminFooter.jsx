@@ -45,7 +45,7 @@ const AdminFooter = () => {
         <hr />
 
         <div className="copyright">
-          © 2023 www.myntra.com. All rights reserved.
+          © 2026 www.vashtra.com. All rights reserved.
         </div>
       </footer>
     </>

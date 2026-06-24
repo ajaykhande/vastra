@@ -15,6 +15,7 @@ import { wishlistActions } from "./store/wishlistSlice";
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce, ToastContainer } from "react-toastify";
 import { getAddress } from "./api/addressApi";
+import { bagActions } from "./store/bagSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,12 +23,23 @@ function App() {
 
   useEffect(() => {
     const refreshLogin = async () => {
-      try {
-        const wishlistRes = await getWishlist(token);
-        dispatch(wishlistActions.setWishlist(wishlistRes));
+      const bagItem = JSON.parse(localStorage.getItem("bag"));
+      if (bagItem) {
+        dispatch(bagActions.setBagItem(bagItem));
+      }
+      const token = localStorage.getItem("token");
 
-        const addressRes = await getAddress(token);
+      if (!token) {
+        return;
+      }
+      try {
+        const addressRes = await getAddress();
         dispatch(authActions.setAddress(addressRes));
+      } catch (err) {}
+
+      try {
+        const wishlistRes = await getWishlist();
+        dispatch(wishlistActions.setWishlist(wishlistRes));
       } catch (err) {}
     };
     refreshLogin();

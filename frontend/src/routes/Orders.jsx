@@ -11,7 +11,6 @@ const Order = () => {
   const [showCancelBtn, setShowCancelBtn] = useState(null);
 
   const orders = useSelector((store) => store.orders.orders);
-  console.log(orders);
   useEffect(() => {
     const loadOrders = async () => {
       const ordersRe = await getOrders();

@@ -10,7 +10,8 @@ const Address = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
+  const [loading, setLoading] = useState(false);
+
   const [editAddress, setEditAddress] = useState(false);
   const address = useSelector((store) => store.auth.address);
   const [formAddress, setFormAddress] = useState({
@@ -46,17 +47,24 @@ const Address = () => {
       toast.error("All fields are required");
       return;
     }
-    if (!address) {
-      const addAddressRes = await addAddress(formAddress);
-      const getAddressRes = await getAddress();
-      dispatch(authActions.setAddress(getAddressRes));
-      toast.success("address added successfuly");
-    } else {
-      const updateRes = await updateAddress(formAddress, address.id);
-      const getAddressRes = await getAddress();
-      dispatch(authActions.setAddress(getAddressRes));
-      setEditAddress(false);
-      toast.success("address updated successfuly");
+    if (loading) return;
+    try {
+      setLoading(true);
+      if (!address) {
+        const addAddressRes = await addAddress(formAddress);
+        const getAddressRes = await getAddress();
+        dispatch(authActions.setAddress(getAddressRes));
+        toast.success("address added successfuly");
+      } else {
+        const updateRes = await updateAddress(formAddress, address.id);
+        const getAddressRes = await getAddress();
+        dispatch(authActions.setAddress(getAddressRes));
+        setEditAddress(false);
+        toast.success("address updated successfuly");
+      }
+    } catch (err) {
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -126,7 +134,12 @@ const Address = () => {
             >
               Cancel
             </button>
-            <button className="save-btn" onClick={handleSave}>
+            <button
+              className="save-btn"
+              onClick={handleSave}
+              disabled={loading}
+              style={{ cursor: loading ? "not-allowed" : "" }}
+            >
               Save
             </button>
           </div>

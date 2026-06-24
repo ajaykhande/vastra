@@ -7,11 +7,9 @@ import "../css/wishlist.css";
 const Wishlist = () => {
   const navigate = useNavigate();
   const wishlistIds = useSelector((store) => store.wishlist);
-  console.log(wishlistIds);
 
   const products = useSelector((store) => store.products.products);
   const wishlistProducts = products.filter((p) => wishlistIds.includes(p.id));
-  console.log(wishlistProducts);
   return (
     <>
       {wishlistIds.length != 0 ? (

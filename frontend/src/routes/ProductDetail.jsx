@@ -15,6 +15,9 @@ const ProductDetail = () => {
 
   const products = useSelector((store) => store.products.products);
   const product = products.find((product) => product.id === Number(id));
+  if (!product) {
+    return;
+  }
 
   const bagProducts = useSelector((store) => store.bag);
   const elementFound = bagProducts.some((bp) => bp.id === product.id);
@@ -88,7 +91,12 @@ const ProductDetail = () => {
 
         <div className="action-buttons">
           {elementFound ? (
-            <button className="add-to-bag-btn go-bag" onClick={() => navigate("/bag")}>GO TO BAG</button>
+            <button
+              className="add-to-bag-btn go-bag"
+              onClick={() => navigate("/bag")}
+            >
+              GO TO BAG
+            </button>
           ) : (
             <button
               className="add-to-bag-btn"

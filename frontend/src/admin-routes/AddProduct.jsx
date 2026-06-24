@@ -8,6 +8,7 @@ import { productActions } from "../store/productSlice";
 const AddProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const [product, setProduct] = useState({
     name: "",
@@ -40,14 +41,20 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+    try {
+      setLoading(true);
+      await addProduct(product);
 
-    await addProduct(product);
+      const allProducts = await getProducts();
+      dispatch(productActions.fetchProductsSuccess(allProducts));
 
-    const allProducts = await getProducts();
-    dispatch(productActions.fetchProductsSuccess(allProducts));
-
-    toast.success("Product added successfully");
-    navigate("/admin/all-product");
+      toast.success("Product added successfully");
+      navigate("/admin/all-product");
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,6 +65,7 @@ const AddProduct = () => {
         <div className="row">
           <label>Product Name</label>
           <input
+            type="text"
             name="name"
             placeholder="Enter product name"
             value={product.name}
@@ -68,6 +76,7 @@ const AddProduct = () => {
         <div className="row">
           <label>Company</label>
           <input
+            type="text"
             name="company"
             placeholder="Enter company name"
             value={product.company}
@@ -78,7 +87,7 @@ const AddProduct = () => {
         <div className="row">
           <label>Current Price</label>
           <input
-            type="number"
+            type="text"
             name="currentPrice"
             placeholder="Enter current price"
             value={product.currentPrice}
@@ -89,7 +98,7 @@ const AddProduct = () => {
         <div className="row">
           <label>Original Price</label>
           <input
-            type="number"
+            type="text"
             name="originalPrice"
             placeholder="Enter original price"
             value={product.originalPrice}
@@ -100,7 +109,7 @@ const AddProduct = () => {
         <div className="row">
           <label>Return Period Days</label>
           <input
-            type="number"
+            type="text"
             name="returnPeriod"
             placeholder="Enter return period"
             value={product.returnPeriod}
@@ -111,6 +120,7 @@ const AddProduct = () => {
         <div className="row">
           <label>Image URL</label>
           <input
+            type="text"
             name="imageUrl"
             placeholder="Enter image URL"
             value={product.imageUrl}
@@ -127,7 +137,7 @@ const AddProduct = () => {
                 <span className="variant-size">{variant.size}</span>
 
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Stock"
                   value={variant.stock}
                   onChange={(e) => {
@@ -146,7 +156,12 @@ const AddProduct = () => {
         </div>
 
         <div className="btn-group">
-          <button type="submit" className="btn-save">
+          <button
+            type="submit"
+            className="btn-save"
+            disabled={loading}
+            style={{ cursor: loading ? "not-allowed" : "" }}
+          >
             Save
           </button>
 

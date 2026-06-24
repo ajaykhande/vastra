@@ -13,6 +13,7 @@ const EditProduct = () => {
 
   const items = useSelector((store) => store.products.products);
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (items.length === 0) return;
@@ -48,12 +49,18 @@ const EditProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await updateProduct(product.id, product);
-    const allProduct = await getProducts();
-    dispatch(productActions.fetchProductsSuccess(allProduct));
-    toast.success("Product updated successfully");
-    navigate("/admin/all-product");
+    if (loading) return;
+    try {
+      setLoading(true);
+      await updateProduct(product.id, product);
+      const allProduct = await getProducts();
+      dispatch(productActions.fetchProductsSuccess(allProduct));
+      toast.success("Product updated successfully");
+      navigate("/admin/all-product");
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -156,7 +163,12 @@ const EditProduct = () => {
         </div>
 
         <div className="btn-group">
-          <button type="submit" className="btn-save">
+          <button
+            type="submit"
+            className="btn-save"
+            disabled={loading}
+            style={{ cursor: loading ? "not-allowed" : "" }}
+          >
             Save
           </button>
 

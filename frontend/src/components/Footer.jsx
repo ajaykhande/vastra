@@ -32,7 +32,7 @@ const Footer = () => {
       <hr />
 
       <div id="footer-copyright">
-        © 2026 www.vastra.com. All rights reserved.
+        © 2026 www.vashtra.com. All rights reserved.
       </div>
     </footer>
   );

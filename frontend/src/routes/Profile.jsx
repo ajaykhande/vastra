@@ -17,24 +17,39 @@ const Profile = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoding] = useState(false);
 
   const handleUpdateProfile = async () => {
-    const updateRes = await updateProfile(name, email);
-    localStorage.setItem("token", updateRes.token);
-    const profileRes = await getProfile();
-    dispatch(authActions.loginSuccess(profileRes));
-    setEditMode(false);
-    toast.success(updateRes.message);
+    if (loading) return;
+    try {
+      setLoding(true);
+      const updateRes = await updateProfile(name, email);
+      localStorage.setItem("token", updateRes.token);
+      const profileRes = await getProfile();
+      dispatch(authActions.loginSuccess(profileRes));
+      setEditMode(false);
+      toast.success(updateRes.message);
+    } catch (err) {
+    } finally {
+      setLoding(false);
+    }
   };
 
   const handleChangePassword = async () => {
-    const changePasswordRes = await changePassword(
-      oldPassword,
-      newPassword,
-      confirmPassword,
-    );
-    setEditModePassword(false);
-    toast.success(changePasswordRes.message);
+    if (loading) return;
+    try {
+      setLoding(true);
+      const changePasswordRes = await changePassword(
+        oldPassword,
+        newPassword,
+        confirmPassword,
+      );
+      setEditModePassword(false);
+      toast.success(changePasswordRes.message);
+    } catch (err) {
+    } finally {
+      setLoding(false);
+    }
   };
 
   return (
@@ -89,7 +104,12 @@ const Profile = () => {
               <button className="cancel-btn" onClick={() => setEditMode(false)}>
                 Cancel
               </button>
-              <button type="submit" className="save-btn">
+              <button
+                type="submit"
+                className="save-btn"
+                disabled={loading}
+                style={{ cursor: loading ? "not-allowed" : "" }}
+              >
                 Save
               </button>
             </div>
@@ -145,7 +165,12 @@ const Profile = () => {
               >
                 Cancel
               </button>
-              <button type="submit" className="save-btn">
+              <button
+                type="submit"
+                className="save-btn"
+                disabled={loading}
+                style={{ cursor: loading ? "not-allowed" : "" }}
+              >
                 Save
               </button>
             </div>

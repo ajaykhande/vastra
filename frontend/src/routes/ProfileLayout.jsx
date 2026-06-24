@@ -8,8 +8,9 @@ const ProfileLayout = () => {
 
   const handleLogout = () => {
     dispatch(authActions.logout());
-  }
-  
+    navigate("/login");
+  };
+
   return (
     <div className="profile-container">
       <div className="profile-sidebar">

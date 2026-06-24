@@ -17,20 +17,37 @@ const Checkout = () => {
   const orderSummary = useSelector((store) => store.orders.orderSummary);
 
   const address = useSelector((store) => store.auth.address);
+  const [loading, setLoading] = useState(false);
 
   const handleConfirmOrder = async () => {
-    const items = orderSummary.items;
-    for (const item of items) {
-      await placeOrder({
-        productId: item.id,
-        quantity: item.qty,
-        size: item.size,
-        totalAmount: item.currentPrice * item.qty,
-      });
+    if (!address) {
+      toast.error("Please add delivery address");
+      return;
     }
-    dispatch(bagActions.clearBag());
-    dispatch(ordersActions.clearOrderSummary());
-    navigate("/order-placed");
+
+    if (loading) return;
+
+    try {
+      setLoading(true);
+
+      const promises = orderSummary.items.map((item) =>
+        placeOrder({
+          productId: item.id,
+          quantity: item.qty,
+          size: item.size,
+          totalAmount: item.currentPrice * item.qty,
+        }),
+      );
+
+      await Promise.all(promises);
+
+      dispatch(bagActions.clearBag());
+      dispatch(ordersActions.clearOrderSummary());
+      navigate("/order-placed");
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -60,21 +77,21 @@ const Checkout = () => {
           <div className="price-row">
             <span className="price-item-tag">Total MRP</span>
             <span className="price-item-value">
-              {orderSummary.totalMRP || 0}
+              ₹{orderSummary.totalMRP || 0}
             </span>
           </div>
 
           <div className="price-row">
             <span className="price-item-tag">Discount</span>
             <span className="price-item-value">
-              {orderSummary.totalDiscount}
+              -₹{orderSummary.totalDiscount}
             </span>
           </div>
 
           <div className="price-row">
             <span className="price-item-tag">Convenience Fee</span>
             <span className="price-item-value">
-              {orderSummary.convenienceFee}
+              ₹{orderSummary.convenienceFee}
             </span>
           </div>
 
@@ -82,11 +99,18 @@ const Checkout = () => {
 
           <div className="price-row">
             <span className="price-item-tag">Total Amount</span>
-            <span className="price-item-value">{orderSummary.finalAmount}</span>
+            <span className="price-item-value">
+              ₹{orderSummary.finalAmount}
+            </span>
           </div>
         </div>
 
-        <button className="place-order-btn" onClick={handleConfirmOrder}>
+        <button
+          className="place-order-btn"
+          onClick={handleConfirmOrder}
+          disabled={loading}
+          style={{ cursor: loading ? "not-allowed" : "" }}
+        >
           CONFIRM ORDER
         </button>
       </div>

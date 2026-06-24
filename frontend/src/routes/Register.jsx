@@ -9,12 +9,20 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoding] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const regiterRes = await register(name, email, password);
-    toast.success("Register Successfully");
-    naviagate("/login");
+    if (loading) return;
+    try {
+      setLoding(true);
+      const regiterRes = await register(name, email, password);
+      toast.success("Register Successfully");
+      naviagate("/login");
+    } catch (err) {
+    } finally {
+      setLoding(false);
+    }
   };
 
   return (
@@ -46,7 +54,13 @@ const Register = () => {
           required
         />
 
-        <button type="sumit">Register</button>
+        <button
+          type="sumit"
+          disabled={loading}
+          style={{ cursor: loading ? "not-allowed" : "" }}
+        >
+          Register
+        </button>
 
         <p>
           Already have an account? <Link to="/login"> Login</Link>

@@ -16,9 +16,13 @@ const BagItem = ({ product }) => {
   const variant = product.variants.find((v) => v.size === product.size);
   const maxQty = variant ? (variant.stock >= 5 ? 5 : variant.stock) : 0;
 
+  const handleRemove = () => {
+    dispatch(bagActions.removeFromBag(product.id));
+  };
+
   return (
     <div className="bag-item-container">
-      <img className="bag-item-img" src={product.imageUrl} alt={product.alt}/>
+      <img className="bag-item-img" src={product.imageUrl} alt={product.alt} />
 
       <div className="bag-item-info">
         <div className="company-name">{product.company}</div>
@@ -82,7 +86,9 @@ const BagItem = ({ product }) => {
           )}
         </div>
       </div>
-      <button className="remove-item">✕</button>
+      <button className="remove-item" onClick={handleRemove}>
+        ✕
+      </button>
     </div>
   );
 };

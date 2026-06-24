@@ -1,8 +1,8 @@
 import axios from "../api/axiosInstance";
 
 export const getProducts = async () => {
-  const response = await axios.get("/product");
-  return response.data;
+    const response = await axios.get("/product");
+    return response.data;
 };
 
 export const addProduct = async (productData) => {

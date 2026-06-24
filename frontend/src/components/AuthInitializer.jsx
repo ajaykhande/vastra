@@ -36,6 +36,7 @@ const AuthInitializer = () => {
       } catch (err) {
         localStorage.removeItem("token");
         dispatch(authActions.logout());
+        window.location.reload();
       } finally {
         dispatch(authActions.authChecked());
       }

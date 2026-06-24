@@ -3,14 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { wishlistActions } from "../store/wishlistSlice";
 import { CiCircleRemove } from "react-icons/ci";
 import { removeFromWishlist } from "../api/wishlistApi";
+import { useState } from "react";
 
 const WishlistProducts = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleRemove = async () => {
-    await removeFromWishlist(item.id); // 🔥 backend
-    dispatch(wishlistActions.removeFromWishlist(item.id));
+    if (loading) return;
+    try {
+      setLoading(true);
+      await removeFromWishlist(item.id);
+      dispatch(wishlistActions.removeFromWishlist(item.id));
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="product-card item-container">
@@ -27,9 +36,14 @@ const WishlistProducts = ({ item }) => {
           <span className="discount">({item.discount}% OFF)</span>
         </div>
       </div>
-        <span className="remove-wishlist" onClick={handleRemove}>
-          REMOVE
-        </span>
+      <span
+        className="remove-wishlist"
+        onClick={handleRemove}
+        disabled={loading}
+        style={{ cursor: loading ? "not-allowed" : "" }}
+      >
+        REMOVE
+      </span>
     </div>
   );
 };

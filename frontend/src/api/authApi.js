@@ -22,7 +22,6 @@ export const getProfile = async () => {
 
 export const updateProfile = async (name, email) => {
   const response = await axios.put("users/update-profile", { name, email });
-  console.log(response);
   return response.data;
 };
 

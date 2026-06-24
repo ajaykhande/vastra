@@ -18,7 +18,6 @@ const authSlice = createSlice({
     },
     setAddress: (state, action) => {
       state.address = action.payload;
-      console.log(state.address);
     },
     updateUser: (state, action) => {
       state.user = action.payload;
