@@ -5,7 +5,7 @@ The project demonstrates real-world features like authentication, role-based aut
 
 ---
 
-## 🌐 Live Demo
+## 🌐 Live Application
 
 - **Frontend (Netlify):**  
   https://vashtra.netlify.app
